@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Calculator</title>
+</head>
+<body>
+<div class="container">
+<h2>Simple Calculator</h2>
+<input id="num1" type="number" placeholder="Enter first number"><br>
+<input id="num2" type="number" placeholder="Enter second number"><br>
+<select id="operation">
+<option value="sum">Sum</option>
+<option value="product">Product</option>
+<option value="difference">Difference</option>
+<option value="remainder">Remainder</option>
+<option value="quotient">Quotient</option>
+<option value="power">Power</option>
+<option value="square">Square(1st number)</option>
+<option value="sqrt">Square Root(1st number)</option>
+</select><br>
+<button onclick="calculate()">Calculate</button>
+<div id="result"></div>
+</div>
+<script>
+function calculate() {
+let a = Number(document.getElementById("num1").value);
+let b = Number(document.getElementById("num2").value);
+let op = document.getElementById("operation").value;
+let ans;
+if (op === "sum") ans = a + b;
+else if (op === "product") ans = a * b;
+else if (op === "difference") ans = a - b;
+else if (op === "remainder") ans = a % b;
+else if (op === "quotient") ans = a / b;
+else if (op === "power") ans = a ** b;
+else if (op === "square") ans = a * a;
+else if (op === "sqrt") ans = Math.sqrt(a);
+document.getElementById("result").innerHTML= "Result: " + ans;
+}
+</script>
+</body>
+</html>
+<style>
+body {
+font-family: Arial;
+background: white;
+display: flex;
+justify-content: center;
+margin-top: 50px;
+}
+.container {
+background: white;
+padding: 20px;
+width: 300px;
+border-radius: 8px;
+box-shadow: 0 0 5px gray;
+text-align: center;
+}
+h2 {
+background: black;
+color: white;
+padding: 8px;
+border-radius: 5px;
+}
+input, select {
+width: 90%;
+padding: 8px;
+margin: 8px 0;
+border: 1px solid gray;
+border-radius: 5px;
+}
+button {
+width: 95%;
+padding: 10px;
+background: blue;
+color: white;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+}
+#result {
+margin-top: 12px;
+font-weight: bold;
+}
+</style>

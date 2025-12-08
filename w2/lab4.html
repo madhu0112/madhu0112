@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+</head>
+<body>
+<h2>Registration Form</h2>
+<form>
+<table>
+<tr>
+<td>First Name:</td>
+<td><input type="text" name="fname"></td>
+</tr>
+<tr>
+<td>Last Name:</td>
+<td><input type="text" name="lname"></td>
+</tr>
+<tr>
+<td>Email:</td>
+<td><input type="email" name="email"></td>
+</tr>
+<tr>
+<td>Password:</td>
+<td><input type="password" name="password"></td>
+</tr>
+<tr>
+<td>Date of Birth:</td>
+<td><input type="date" name="dob"></td>
+</tr>
+<tr>
+<td>Gender:</td>
+<td>
+<input type="radio" name="gender" value="Male"> Male
+<input type="radio" name="gender" value="Female"> Female
+</td>
+</tr>
+<tr>
+<td>Country:</td>
+<td>
+<select>
+<option>India</option>
+<option>USA</option>
+<option>UK</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>Bio:</td>
+<td><textarea rows="3" cols="25"></textarea></td>
+<tr>
+<td colspan="2" align="center">
+<input type="submit" value="Register">
+<input type="reset" value="Reset">
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+<style>
+body {
+background-color: #f2f2f2;
+font-family: Arial;
+}
+h2 {
+text-align: center;
+color: #333;
+}
+table {
+background-color: white;
+margin: auto;
+padding: 20px;
+border-radius: 10px;
+}
+td {
+padding: 5px;
+}
+input, select, textarea {
+width: 100%;
+padding: 5px;
+}
+input[type=radio]{
+width:auto;
+}
+input[type=submit], input[type=reset] {
+width: 100px;
+color: white;
+border: none;
+padding: 8px;
+}
+input[type=submit] {
+background-color: green;
+}
+input[type=reset] {
+background-color: red;
+}
+</style>
