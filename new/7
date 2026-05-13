@@ -1,0 +1,93 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.datasets import load_boston
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+
+# -----------------------------
+# Linear Regression using Boston Housing Dataset
+# -----------------------------
+
+# Load dataset
+boston = load_boston()
+
+X = boston.data
+y = boston.target
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Create Linear Regression model
+linear_model = LinearRegression()
+
+# Train model
+linear_model.fit(X_train, y_train)
+
+# Predict
+y_pred_linear = linear_model.predict(X_test)
+
+# Evaluate model
+mse_linear = mean_squared_error(y_test, y_pred_linear)
+
+print("Linear Regression Mean Squared Error:", mse_linear)
+
+# -----------------------------
+# Polynomial Regression using Auto MPG Dataset
+# -----------------------------
+
+# Create sample Auto MPG-like dataset
+np.random.seed(0)
+
+horsepower = np.random.rand(100) * 200
+mpg = 50 - 0.05 * horsepower + 0.0001 * horsepower**2 \
+      + np.random.normal(0, 2, 100)
+
+# Reshape data
+X_poly = horsepower.reshape(-1, 1)
+y_poly = mpg
+
+# Create Polynomial Regression model
+degree = 2
+
+poly_model = make_pipeline(
+    PolynomialFeatures(degree),
+    LinearRegression()
+)
+
+# Train model
+poly_model.fit(X_poly, y_poly)
+
+# Predict
+y_pred_poly = poly_model.predict(X_poly)
+
+# Plot Polynomial Regression
+plt.figure(figsize=(10, 6))
+
+plt.scatter(X_poly, y_poly, color='blue', label='Data Points')
+
+sorted_indices = np.argsort(X_poly[:, 0])
+
+plt.plot(
+    X_poly[sorted_indices],
+    y_pred_poly[sorted_indices],
+    color='red',
+    linewidth=2,
+    label='Polynomial Regression Curve'
+)
+
+plt.title('Polynomial Regression - Auto MPG Dataset')
+plt.xlabel('Horsepower')
+plt.ylabel('MPG')
+
+plt.legend()
+plt.grid(True)
+
+plt.show()
