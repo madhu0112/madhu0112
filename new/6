@@ -1,0 +1,53 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate sample dataset
+np.random.seed(0)
+X = np.linspace(0, 10, 100)
+y = np.sin(X) + np.random.normal(0, 0.2, X.shape)
+
+# Add bias term
+X_bias = np.c_[np.ones(X.shape[0]), X]
+
+# Function to compute weights
+def compute_weights(query_point, X, tau):
+    weights = np.exp(-np.sum((X - query_point) ** 2, axis=1) / (2 * tau ** 2))
+    return np.diag(weights)
+
+# Locally Weighted Regression function
+def locally_weighted_regression(X, y, query_point, tau):
+
+    W = compute_weights(query_point, X, tau)
+
+    # Theta calculation using Normal Equation
+    theta = np.linalg.pinv(X.T @ W @ X) @ (X.T @ W @ y)
+
+    # Prediction
+    prediction = query_point @ theta
+
+    return prediction
+
+# Bandwidth parameter
+tau = 0.5
+
+# Predict outputs for all points
+y_pred = np.array([
+    locally_weighted_regression(X_bias, y, X_bias[i], tau)
+    for i in range(len(X))
+])
+
+# Plot results
+plt.figure(figsize=(10, 6))
+
+plt.scatter(X, y, color='blue', label='Data Points')
+plt.plot(X, y_pred, color='red', linewidth=2,
+         label='Locally Weighted Regression')
+
+plt.title('Locally Weighted Regression')
+plt.xlabel('X')
+plt.ylabel('y')
+
+plt.legend()
+plt.grid(True)
+
+plt.show()
